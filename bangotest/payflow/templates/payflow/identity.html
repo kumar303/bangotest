@@ -1,0 +1,13 @@
+{% extends "payflow/base.html" %}
+
+{% block content %}
+<pre>
+Identity result:
+Valid Bango request? {{ valid }}
+Bango ID: {{ request['u'] }}
+Operator Network: {{ request['n'] }}
+Current Network: {{ request['cn'] }}
+Region: {{ request['r'] }}
+Current Region: {{ request['cr'] }}
+</pre>
+{% endblock %}
