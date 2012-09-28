@@ -8,9 +8,9 @@ from . import base
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'playdoh_app',
-        'USER': 'root',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'bangotest.db',
+        'USER': '',
         'PASSWORD': '',
         'HOST': '',
         'PORT': '',
