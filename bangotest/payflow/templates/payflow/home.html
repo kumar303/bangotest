@@ -8,7 +8,11 @@
 {% block site_js %}
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 <script type="text/javascript">
+  {# These numbers are configured in the Setup and Config
+     section of Bango. Each has a preconfigured redirect URL.
+     You can see the handlers to those in payflow/views.py #}
   $('#simpay').click(function() {
+      // This is a payment number but the product is free.
       var url = 'http://bango.net/go/?bango=1113330000000250479';
       console.log('going to', url);
       window.location.href = url;

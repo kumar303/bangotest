@@ -14,6 +14,10 @@ log = commonware.log.getLogger('playdoh')
 def home(request):
     return render(request, 'payflow/home.html', {})
 
+# Below are handlers for redirect URLs that are
+# assigned to Bango numbers using the Setup and Config
+# section of Bango. The Bango numbers that begin the
+# requests are in templates/payflow/home.html
 
 def process(request):
     """Process a payment response redirect."""
