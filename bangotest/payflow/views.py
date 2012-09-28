@@ -1,14 +1,11 @@
-import logging
 import pprint
 
-from django import http
 from django.shortcuts import render
 
 import bleach
 import commonware
-from funfactory.log import log_cef
-from mobility.decorators import mobile_template
-from session_csrf import anonymous_csrf
+from lxml import etree
+import requests
 
 
 log = commonware.log.getLogger('playdoh')
@@ -20,4 +17,13 @@ def home(request):
 
 def process(request):
     log.info(pprint.pformat(dict(request.REQUEST.items())))
-    return http.HttpResponse('logged request')
+    qs = request.META['QUERY_STRING']
+    res = requests.get('https://xml.bango.net/tokenCheck.aspx?%s' % qs)
+    tr = etree.fromstring(res.content)
+    valid = tr.attrib['success'] == 'true'
+    log.info('valid? %s' % valid)
+    if not valid:
+        log.error('response: %s' % res.content)
+    return render(request, 'payflow/process.html',
+                  {'valid': valid,
+                   'request': request.REQUEST})

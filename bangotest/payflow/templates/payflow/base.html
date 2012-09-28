@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html LANG="{{ LANG }}" dir="{{ DIR }}">
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <title>{% block page_title %}Pay Flow{% endblock %}</title>
+
+    {% block site_css %}
+      <link href="{{ static('examples/css/main.css') }}" rel="stylesheet">
+    {% endblock %}
+  </head>
+  <body data-mobile-cookie="{{ settings.MOBILE_COOKIE }}">
+    {% block content %}
+    {% endblock %}
+
+    {% block site_js %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $('#simpay').click(function() {
+          var url = 'http://bango.net/go/?bango=1113330000000250479';
+          console.log('going to', url);
+          window.location.href = url;
+      });
+    </script>
+    {% endblock %}
+  </body>
+</html>
