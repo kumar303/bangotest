@@ -2,8 +2,9 @@
 
 {% block content %}
 <pre>
-valid Bango request? {{ valid }}
-bango ID: {{ request['u'] }}
+Payment result:
+Valid Bango request? {{ valid }}
+Bango ID: {{ request['u'] }}
 Transaction ID: {{ request['x'] }}
 Operator Network: {{ request['n'] }}
 Current Network: {{ request['cn'] }}

@@ -2,4 +2,21 @@
 
 {% block content %}
   <button id="simpay">Simulate mobile payment</button> (you will not be charged)
+  <button id="ident">Identify your phone for payment</button>
+{% endblock %}
+
+{% block site_js %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<script type="text/javascript">
+  $('#simpay').click(function() {
+      var url = 'http://bango.net/go/?bango=1113330000000250479';
+      console.log('going to', url);
+      window.location.href = url;
+  });
+  $('#ident').click(function() {
+      var url = 'http://bango.net/id/?bango=1113330000000250630&p=ourtoken';
+      console.log('going to', url);
+      window.location.href = url;
+  });
+</script>
 {% endblock %}
