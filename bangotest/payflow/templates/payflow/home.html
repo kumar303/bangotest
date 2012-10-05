@@ -1,8 +1,19 @@
 {% extends "payflow/base.html" %}
 
 {% block content %}
-  <button id="simpay">Simulate mobile payment</button> (you will not be charged)
-  <button id="ident">Identify your phone for payment</button>
+  <section id="pay">
+    <p>
+      <button id="dopay">Make mobile payment</button>
+    </p>
+    <p>(you <b>will</b> be charged)</p>
+    <p>
+      <button id="simpay">Simulate mobile payment</button>
+    </p>
+    <p>(you will not be charged)</p>
+    <p>
+      <button id="ident">Identify your phone for payment</button>
+    </p>
+  </section>
 {% endblock %}
 
 {% block site_js %}
@@ -11,15 +22,17 @@
   {# These numbers are configured in the Setup and Config
      section of Bango. Each has a preconfigured redirect URL.
      You can see the handlers to those in payflow/views.py #}
+  $('#dopay').click(function() {
+      var url = 'http://bango.net/go/?bango=1113330000000250475';
+      window.location.href = url;
+  });
   $('#simpay').click(function() {
       // This is a payment number but the product is free.
       var url = 'http://bango.net/go/?bango=1113330000000250479';
-      console.log('going to', url);
       window.location.href = url;
   });
   $('#ident').click(function() {
       var url = 'http://bango.net/id/?bango=1113330000000250630&p=ourtoken';
-      console.log('going to', url);
       window.location.href = url;
   });
 </script>

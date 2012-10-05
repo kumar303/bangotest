@@ -6,6 +6,9 @@
 
     {% block site_css %}
       <link href="{{ static('examples/css/main.css') }}" rel="stylesheet">
+      <style type="text/css">
+        #pay p { text-align: center; }
+      </style>
     {% endblock %}
   </head>
   <body data-mobile-cookie="{{ settings.MOBILE_COOKIE }}">
