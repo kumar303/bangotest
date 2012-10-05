@@ -2,12 +2,10 @@
 
 {% block content %}
   <section id="pay">
-    <!--
     <p>
       <button id="dopay">Make mobile payment</button>
     </p>
     <p>(you <b>will</b> be charged)</p>
-    -->
     <p>
       <button id="simpay">Simulate mobile payment</button>
     </p>
@@ -25,7 +23,7 @@
      section of Bango. Each has a preconfigured redirect URL.
      You can see the handlers to those in payflow/views.py #}
   $('#dopay').click(function() {
-      var url = 'http://bango.net/go/?bango=1113330000000250475';
+      var url = 'http://bango.net/go/?bango=1113330000000261812';
       window.location.href = url;
   });
   $('#simpay').click(function() {
