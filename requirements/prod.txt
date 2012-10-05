@@ -1,2 +1,3 @@
 #-r ../vendor/src/funfactory/funfactory/requirements/prod.txt
 requests==0.14.0
+suds==0.4
