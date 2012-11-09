@@ -1,0 +1,205 @@
+>>> import suds
+>>> from suds.client import Client
+>>> client = Client('https://webservices.bango.com/mozillaexporter/?WSDL')
+package = client.factory.create('CreatePackageRequest')
+package.username = 'Mozilla'
+package.password = '*********'
+package.adminEmailAddress = 'kumar.mcmillan@gmail.com'
+package.supportEmailAddress = 'kumar.mcmillan@gmail.com'
+package.financeEmailAddress = 'kumar.mcmillan@gmail.com'
+package.paypalEmailAddress = 'kumar.mcmillan@gmail.com'
+package.vendorName = 'Kumar Test'
+package.companyName = 'Kumar Test'
+package.address1 = '111 Somewhere St.'
+package.addressCity = 'Chicago' 
+package.addressState = 'IL' 
+package.addressZipCode = '60640' 
+package.addressPhone = '11111111111' 
+package.countryIso = 'USA' 
+package.currencyIso = 'USD' 
+resp = client.service.CreatePackage(package)
+
+>>> print package
+(CreatePackageRequest){
+   username = "Mozilla"
+   password = "*********"
+   adminEmailAddress = "kumar.mcmillan@gmail.com"
+   supportEmailAddress = "kumar.mcmillan@gmail.com"
+   financeEmailAddress = "kumar.mcmillan@gmail.com"
+   paypalEmailAddress = "kumar.mcmillan@gmail.com"
+   vendorName = "Kumar Test"
+   companyName = "Kumar Test"
+   address1 = "111 Somewhere St."
+   address2 = None
+   addressCity = "Chicago"
+   addressState = "IL"
+   addressZipCode = "60640"
+   addressPhone = "7737262397"
+   addressFax = None
+   vatNumber = None
+   countryIso = "USA"
+   currencyIso = "USD"
+   homePageURL = None
+   eventNotificationURL = None
+ }
+
+>>> print resp
+(CreatePackageResponse){
+   responseCode = "OK"
+   responseMessage = "Success"
+   packageId = 906115
+   adminPersonId = 598545
+   adminPersonPassword = None
+   supportPersonId = 598545
+   supportPersonPassword = None
+   financePersonId = 598545
+   financePersonPassword = None
+ }
+
+>>> import logging
+>>> logging.basicConfig(level=logging.INFO)
+>>> logging.getLogger('suds.client').setLevel(logging.DEBUG)
+>>> logging.getLogger('suds.transport').setLevel(logging.DEBUG)
+>>> logging.getLogger('suds.xsd.schema').setLevel(logging.DEBUG)
+>>> logging.getLogger('suds.wsdl').setLevel(logging.DEBUG)
+>>> resp = client.service.CreatePackage(package)
+
+
+
+
+
+
+number.username = 'Mozilla'
+number.password = '*********'
+number.packageId = 906115
+number.name = 'Kumar Test Product'
+number.categoryId = 1
+
+>>> print number
+(CreateBangoNumberRequest){
+   username = "Mozilla"
+   password = "*********"
+   packageId = 906115
+   name = "Kumar Test Product"
+   categoryId = 1
+   applicationSize = None
+ }
+>>> resp
+(CreateBangoNumberResponse){
+   responseCode = "OK"
+   responseMessage = "Success"
+   bango = "1113330000000307801"
+ }
+ 
+ 
+>>> multi = client.factory.create('MakePremiumPerAccessRequest')
+>>> multi
+(MakePremiumPerAccessRequest){
+   username = None
+   password = None
+   bango = None
+   price = None
+   currencyIso = None
+ }
+multi.username = 'Mozilla'
+multi.password = '*********'
+multi.bango = '1113330000000307801'
+multi.price = '0.99'
+multi.currencyIso = 'USD'
+
+>>> print multi
+(MakePremiumPerAccessRequest){
+   username = "Mozilla"
+   password = "*********"
+   bango = "1113330000000307801"
+   price = "0.99"
+   currencyIso = "USD"
+ }
+ >>> print resp
+(MakePremiumPerAccessResponse){
+   responseCode = "OK"
+   responseMessage = "Success"
+ }
+
+
+
+client = Client('https://webservices.bango.com/billingconfiguration/?WSDL')
+
+config = client.factory.create('CreateBillingConfigurationRequest')
+config.username = 'Mozilla'
+config.password = '*********'
+config.bango = '1113330000000307801'
+
+price = client.factory.create('Price')
+price.amount = '0.99'
+price.currency = 'USD'
+config.priceList = [price]
+
+
+>>> opt_array = client.factory.create('ArrayOfBillingConfigurationOption')
+>>> opt_array.BillingConfigurationOption.append(opt)
+>>> opt_array.BillingConfigurationOption.append(opt2)
+>>> opt_array.BillingConfigurationOption.append(opt3)
+>>> opt_array
+(ArrayOfBillingConfigurationOption){
+   BillingConfigurationOption[] = 
+      (BillingConfigurationOption){
+         configurationOptionName = "APPLICATION_CATEGORY_ID"
+         configurationOptionValue = "18"
+      },
+      (BillingConfigurationOption){
+         configurationOptionName = "APPLICATION_SIZE_KB"
+         configurationOptionValue = "2"
+      },
+      (BillingConfigurationOption){
+         configurationOptionName = "BILLING_CONFIGURATION_TIME_OUT"
+         configurationOptionValue = "120"
+      },
+ }
+
+config.configurationOptions = opt_array
+
+>>> config
+(CreateBillingConfigurationRequest){
+   username = "Mozilla"
+   password = "*********"
+   bango = "1113330000000307801"
+   typeFilter[] = 
+      "OPERATOR",
+      "PSMS",
+      "CARD",
+      "INTERNET",
+   priceList[] = 
+      (Price){
+         amount = "0.99"
+         currency = "USD"
+      },
+   externalTransactionId = 123
+   pageTitle = "Test App"
+   configurationOptions = 
+      (ArrayOfBillingConfigurationOption){
+         BillingConfigurationOption[] = 
+            (BillingConfigurationOption){
+               configurationOptionName = "APPLICATION_CATEGORY_ID"
+               configurationOptionValue = "18"
+            },
+            (BillingConfigurationOption){
+               configurationOptionName = "APPLICATION_SIZE_KB"
+               configurationOptionValue = "2"
+            },
+            (BillingConfigurationOption){
+               configurationOptionName = "BILLING_CONFIGURATION_TIME_OUT"
+               configurationOptionValue = "120"
+            },
+      }
+ }
+
+
+>>> resp
+(CreateBillingConfigurationResult){
+   responseCode = "OK"
+   responseMessage = "Success"
+   billingConfigurationId = 1315
+ }
+
+client = Client('https://webservices.test.bango.org/mozillaexporter/?WSDL')
